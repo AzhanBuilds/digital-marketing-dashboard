@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Digital Marketing Analytics Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-icon">DM</div><div><strong>MarketPulse</strong><small>Analytics Studio</small></div></div>
+      <nav>
+        <a class="nav-link active" href="#overview">▦ <span>Overview</span></a>
+        <a class="nav-link" href="#website">◉ <span>Website Analytics</span></a>
+        <a class="nav-link" href="#social">◎ <span>Social Media</span></a>
+        <a class="nav-link" href="#campaigns">↗ <span>Campaigns</span></a>
+        <a class="nav-link" href="#data">⇧ <span>Data & Reports</span></a>
+      </nav>
+      <div class="sidebar-note"><div class="note-icon">✦</div><strong>Marketing insights</strong><p>Understand your performance and find new opportunities.</p></div>
+      <div class="sidebar-footer">College Project · v1.0</div>
+    </aside>
+
+    <main class="main-content" id="overview">
+      <header class="topbar">
+        <div><p class="eyebrow">ANALYTICS / OVERVIEW</p><h1>Digital Marketing Dashboard</h1><p class="subtitle">Track your marketing performance in one place.</p></div>
+        <div class="top-actions"><span class="status-dot"></span><span>Sample data ready</span><button class="button secondary" onclick="refreshDashboard()">↻ Refresh</button></div>
+      </header>
+
+      <section class="section-heading"><div><h2>Performance overview</h2><p>Summary of your uploaded marketing data</p></div><span class="date-chip">● Live dashboard</span></section>
+      <section class="kpi-grid">
+        <article class="kpi-card"><div class="kpi-top"><span>Total Visitors</span><span class="kpi-icon blue">◉</span></div><strong id="visitors">—</strong><small>Website traffic</small></article>
+        <article class="kpi-card"><div class="kpi-top"><span>Page Views</span><span class="kpi-icon purple">▤</span></div><strong id="page_views">—</strong><small>Total page views</small></article>
+        <article class="kpi-card"><div class="kpi-top"><span>Engagements</span><span class="kpi-icon orange">♡</span></div><strong id="engagements">—</strong><small>Likes, comments & shares</small></article>
+        <article class="kpi-card"><div class="kpi-top"><span>Engagement Rate</span><span class="kpi-icon green">↗</span></div><strong id="engagement_rate">—</strong><small>Engagements / visitors</small></article>
+      </section>
+
+      <section class="chart-grid" id="website">
+        <article class="panel chart-panel wide"><div class="panel-heading"><div><h3>Website traffic</h3><p>Visitors over time</p></div><span class="mini-label">TREND</span></div><div id="trafficChart" class="chart"></div></article>
+        <article class="panel chart-panel"><div class="panel-heading"><div><h3>Social engagement</h3><p>Performance by platform</p></div></div><div id="platformChart" class="chart"></div></article>
+      </section>
+
+      <section class="chart-grid" id="social">
+        <article class="panel chart-panel wide" id="campaigns"><div class="panel-heading"><div><h3>Campaign performance</h3><p>Clicks and conversions by campaign</p></div><span class="mini-label">CAMPAIGNS</span></div><div id="campaignChart" class="chart"></div></article>
+        <article class="panel summary-panel"><div class="panel-heading"><div><h3>Quick insights</h3><p>Calculated from your data</p></div></div>
+          <div class="insight-row"><span class="insight-symbol blue">↗</span><div><small>Total clicks</small><strong id="clicks">—</strong></div></div>
+          <div class="insight-row"><span class="insight-symbol green">✓</span><div><small>Conversions</small><strong id="conversions">—</strong></div></div>
+          <div class="insight-row"><span class="insight-symbol purple">%</span><div><small>Click-through rate</small><strong id="ctr">—</strong></div></div>
+          <p class="small-note">CTR is calculated as clicks divided by page views. Use comparable datasets for meaningful results.</p>
+        </article>
+      </section>
+
+      <section class="panel table-panel">
+        <div class="panel-heading"><div><h3>Top-performing records</h3><p>Posts with the most likes, comments and shares combined</p></div><span class="mini-label">TOP 5</span></div>
+        <div class="table-wrap"><table><thead><tr><th>Date</th><th>Platform</th><th>Campaign</th><th>Engagements</th></tr></thead><tbody id="topPosts"><tr><td colspan="4">Loading data…</td></tr></tbody></table></div>
+      </section>
+
+      <section class="panel upload-panel" id="data">
+        <div><div class="panel-heading"><div><h3>Upload marketing data</h3><p>Upload a CSV file to update the dashboard.</p></div></div>
+          <p class="upload-help">Your CSV must contain: date, visitors, page_views, platform, likes, comments, shares, campaign, clicks, conversions, spend.</p>
+          <form id="uploadForm"><label class="file-picker">Choose CSV file<input type="file" id="csvFile" name="file" accept=".csv" required></label><button class="button primary" type="submit">Upload & analyze</button><a class="button secondary" href="/download">Download report CSV</a></form>
+          <div id="uploadMessage" class="message" role="status"></div>
+        </div>
+      </section>
+      <footer>Digital Marketing Analytics Dashboard <span>Built with Flask · Pandas · Plotly</span></footer>
+    </main>
+  </div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
